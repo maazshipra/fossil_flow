@@ -5,600 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fossil Flow – CP Fittings & Sanitary Wares</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --bg: #faf6ef;
-    --surface: #ffffff;
-    --surface-alt: #f4ede5;
-    --text: #121212;
-    --text-secondary: #5f5f5f;
-    --border: rgba(18,18,18,0.08);
-    --grey: #6f6f6f;
-    --chrome: #8f8f8f;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* ---- NAV ---- */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 48px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0) 100%);
-    backdrop-filter: blur(10px);
-    transition: background 0.4s;
-  }
-  nav.scrolled { background: rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.55rem;
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .nav-logo span { color: var(--text-secondary); font-weight: 400; }
-  .logo-img { height: 40px; width: auto; display: block; }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.82rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: color 0.25s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--text);
-    border: none;
-    padding: 10px 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.25s;
-    text-decoration: none;
-  }
-  .nav-cta:hover { background: var(--gold-light); }
-
-  /* ---- HERO ---- */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-    padding: 0 8vw;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(201,168,76,0.12) 0%, transparent 70%),
-      linear-gradient(135deg, #fbf6ef 40%, #f4ede5 100%);
-  }
-  .hero-lines {
-    position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(201,168,76,0.08) 80px),
-      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(201,168,76,0.08) 80px);
-  }
-  .hero-badge {
-    position: relative;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
-  }
-  .hero-badge::before {
-    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
-  }
-  .hero-title {
-    position: relative;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3.2rem, 7vw, 6.5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    margin-bottom: 28px;
-    color: var(--text);
-    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
-  }
-  .hero-title .accent { color: var(--gold); }
-  .hero-sub {
-    position: relative;
-    font-size: 1rem;
-    color: var(--grey);
-    font-weight: 300;
-    max-width: 480px;
-    line-height: 1.7;
-    margin-bottom: 44px;
-    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
-  }
-  .hero-btns {
-    position: relative;
-    display: flex; gap: 16px;
-    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--text);
-    padding: 14px 36px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.25s, transform 0.2s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-outline {
-    border: 1px solid rgba(201,168,76,0.4);
-    color: var(--text);
-    padding: 14px 36px;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.25s, color 0.25s, transform 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
-  /* decorative chrome faucet illustration */
-  .hero-img-wrap {
-    position: absolute; right: 0; bottom: 0;
-    width: 48%; max-width: 680px; height: 100%;
-    display: flex; align-items: flex-end; justify-content: center;
-    pointer-events: none;
-    opacity: 0; animation: fadeIn 1.2s 0.5s forwards;
-  }
-  .hero-img-wrap img {
-    width: 100%; height: 100%; object-fit: cover; object-position: left bottom;
-    opacity: 0.18;
-    filter: brightness(1.4) contrast(1.1) grayscale(0.2);
-  }
-  .hero-glow {
-    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    width: 40%; height: 60%;
-    background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-stats {
-    position: absolute; bottom: 48px; right: 8vw;
-    display: flex; gap: 48px;
-    opacity: 0; animation: fadeUp 0.8s 1.1s forwards;
-  }
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--grey);
-    margin-top: 6px;
-  }
-
-  /* ---- ABOUT STRIP ---- */
-  #about {
-    background: var(--surface);
-    border-top: 1px solid rgba(201,168,76,0.18);
-    border-bottom: 1px solid rgba(201,168,76,0.18);
-    padding: 72px 8vw;
-    display: flex; align-items: center; gap: 64px;
-  }
-  .about-label {
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
-    margin-bottom: 14px;
-  }
-  .about-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    flex: 0 0 auto;
-    max-width: 340px;
-  }
-  .about-divider {
-    width: 1px; height: 120px;
-    background: linear-gradient(180deg, transparent, var(--gold) 50%, transparent);
-    flex: 0 0 auto;
-  }
-  .about-text {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    flex: 1;
-  }
-  .about-text strong { color: var(--text); font-weight: 600; }
-
-  /* ---- PRODUCTS ---- */
-  #products {
-    padding: 96px 8vw;
-  }
-  .section-header {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    margin-bottom: 56px;
-  }
-  .section-label {
-    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.1;
-  }
-  .section-note {
-    font-size: 0.82rem; color: var(--grey); max-width: 280px; text-align: right;
-    line-height: 1.6;
-  }
-
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .product-card {
-    position: relative; overflow: hidden; cursor: pointer;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .product-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
-  .product-link { display: block; color: inherit; text-decoration: none; }
-  .product-card-img {
-    width: 100%; aspect-ratio: 4/3;
-    background: #f6f1e8;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-  }
-  .product-card-img img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(0.05) brightness(1);
-    transition: filter 0.4s, transform 0.5s;
-  }
-  .product-card:hover .product-card-img img {
-    filter: grayscale(0) brightness(1);
-    transform: scale(1.04);
-  }
-  .product-card-img .overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(255,255,255,0.92) 100%);
-  }
-  .series-link,
-  .product-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-  .product-card-body {
-    padding: 22px 24px;
-    border-top: 1px solid rgba(201,168,76,0.1);
-  }
-  .product-type {
-    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 6px;
-  }
-  .product-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; font-weight: 700;
-  }
-  .product-desc {
-    font-size: 0.78rem; color: var(--grey);
-    margin-top: 6px; line-height: 1.55;
-  }
-  /* placeholder for missing images */
-  .img-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #1e1e1e, #2a2520);
-  }
-  .img-placeholder svg { width: 64px; height: 64px; opacity: 0.25; }
-
-  /* ---- SERIES ---- */
-  #series {
-    padding: 96px 8vw;
-    background: var(--surface-alt);
-    border-top: 1px solid rgba(201,168,76,0.1);
-  }
-  .series-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 56px;
-  }
-  .series-card {
-    border: 1px solid rgba(201,168,76,0.18);
-    padding: 28px 24px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s, transform 0.3s;
-    overflow: hidden;
-  }
-  .series-card::before {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    height: 2px; width: 0;
-    background: var(--gold);
-    transition: width 0.4s;
-  }
-  .series-card:hover::before { width: 100%; }
-  .series-card:hover {
-    background: rgba(201,168,76,0.05);
-    border-color: rgba(201,168,76,0.45);
-    transform: translateY(-4px);
-  }
-  .series-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem; font-weight: 900;
-    color: rgba(201,168,76,0.15);
-    position: absolute; top: 12px; right: 18px;
-    line-height: 1;
-  }
-  .series-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-    position: relative;
-  }
-  .series-tag {
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* ---- WHY US ---- */
-  #why {
-    padding: 96px 8vw;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  }
-  .why-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 800; line-height: 1.15;
-    margin-bottom: 32px;
-  }
-  .why-heading .accent { color: var(--gold); }
-  .why-features { display: flex; flex-direction: column; gap: 24px; }
-  .why-feat {
-    display: flex; gap: 20px; align-items: flex-start;
-    padding: 20px; border-left: 2px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-    cursor: default;
-  }
-  .why-feat:hover {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.04);
-  }
-  .why-feat-icon {
-    width: 40px; height: 40px; flex: 0 0 auto;
-    background: rgba(201,168,76,0.12);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 1.1rem;
-  }
-  .why-feat-title {
-    font-size: 0.9rem; font-weight: 500; margin-bottom: 4px;
-  }
-  .why-feat-desc { font-size: 0.8rem; color: var(--grey); line-height: 1.6; }
-  .why-visual {
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    min-height: 420px;
-  }
-  .why-circle {
-    width: 320px; height: 320px; border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.15);
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .why-circle::before {
-    content: ''; position: absolute;
-    width: 240px; height: 240px; border-radius: 50%;
-    border: 1px solid rgba(201,168,76,0.25);
-  }
-  .why-circle::after {
-    content: ''; position: absolute;
-    width: 160px; height: 160px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, rgba(201,168,76,0.04) 100%);
-  }
-  .why-center-text {
-    position: relative; z-index: 2; text-align: center;
-  }
-  .why-center-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1;
-  }
-  .why-center-label {
-    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--grey); margin-top: 6px;
-  }
-  .orbit-dot {
-    position: absolute; width: 10px; height: 10px; border-radius: 50%;
-    background: var(--gold);
-    animation: orbit 8s linear infinite;
-  }
-  .orbit-dot:nth-child(2) { animation-delay: -2.7s; opacity: 0.5; }
-  .orbit-dot:nth-child(3) { animation-delay: -5.3s; opacity: 0.3; }
-  @keyframes orbit {
-    0%   { transform: rotate(0deg)   translateX(158px); }
-    100% { transform: rotate(360deg) translateX(158px); }
-  }
-
-  /* ---- CONTACT ---- */
-  #contact {
-    padding: 96px 8vw 60px;
-    background: var(--surface-alt);
-    border-top: 1px solid rgba(201,168,76,0.12);
-  }
-  .contact-inner {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
-  }
-  .contact-left .contact-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 800; line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .contact-left .contact-sub {
-    font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 40px;
-  }
-  .contact-detail {
-    display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px;
-  }
-  .contact-icon {
-    width: 40px; height: 40px; background: rgba(201,168,76,0.1);
-    border-radius: 4px; display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 1rem; flex: 0 0 auto;
-  }
-  .contact-detail-label {
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 4px;
-  }
-  .contact-detail-value {
-    font-size: 0.9rem; color: var(--text); line-height: 1.6;
-  }
-  .contact-detail-value a { color: var(--gold); text-decoration: none; }
-  .contact-detail-value a:hover { color: var(--gold); }
-
-  /* contact form */
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group label {
-    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey);
-  }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: #ffffff;
-    border: 1px solid rgba(18,18,18,0.08);
-    color: var(--text);
-    padding: 12px 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    outline: none;
-    transition: border-color 0.25s;
-    resize: vertical;
-  }
-  .form-group input::placeholder,
-  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: var(--gold); }
-  .form-group select option { background: var(--surface); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .btn-submit {
-    background: var(--gold);
-    color: var(--text);
-    border: none;
-    padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.25s, transform 0.2s;
-    align-self: flex-start;
-    margin-top: 4px;
-  }
-  .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .form-success {
-    display: none; background: rgba(201,168,76,0.1); border: 1px solid var(--gold);
-    padding: 14px 20px; color: var(--gold); font-size: 0.85rem; margin-top: 8px;
-  }
-
-  /* ---- FOOTER ---- */
-  footer {
-    padding: 32px 8vw;
-    display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid rgba(18,18,18,0.08);
-    background: var(--bg);
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; color: var(--gold); letter-spacing: 0.08em;
-  }
-  .footer-copy {
-    font-size: 0.75rem; color: var(--text-secondary);
-    text-align: center;
-  }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a {
-    font-size: 0.75rem; color: var(--text-secondary); text-decoration: none;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    transition: color 0.25s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ---- ANIMATIONS ---- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.7s, transform 0.7s;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ---- RESPONSIVE ---- */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    #about { flex-direction: column; gap: 32px; }
-    .about-divider { width: 60px; height: 1px; }
-    .about-heading { max-width: 100%; }
-    .products-grid { grid-template-columns: 1fr 1fr; }
-    .series-grid { grid-template-columns: repeat(2, 1fr); }
-    #why { grid-template-columns: 1fr; gap: 40px; }
-    .why-visual { min-height: 280px; }
-    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-stats { position: static; margin-top: 48px; }
-    .hero-img-wrap { display: none; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .section-note { text-align: left; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; text-align: center; }
-  }
-  @media (max-width: 560px) {
-    nav { padding: 14px 20px; }
-    #hero { padding: 0 6vw; }
-    #products, #series, #why, #contact { padding: 64px 6vw; }
-    .products-grid { grid-template-columns: 1fr; }
-    .series-grid { grid-template-columns: 1fr 1fr; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -661,26 +68,84 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div>
-    <div class="about-label">Who We Are</div>
-    <div class="about-heading reveal">
-      Flowman Metal<br>Industries
+    <div class="about-left reveal">
+        <div class="about-label">About Company</div>
+
+        <h2 class="about-heading">
+            Over 20 Years of<br>
+            Trusted Excellence
+        </h2>
+
+        <p class="about-sub">
+            Delivering premium brass bathroom solutions since 2004.
+        </p>
     </div>
-  </div>
-  <div class="about-divider"></div>
-  <div class="about-text reveal">
-    <p>
-      <strong>Fossil Flow</strong> is the flagship brand of <strong>Flowman Metal Industries</strong>,
-      a Pune-based manufacturer and wholesaler specialising in high-quality CP fittings,
-      bathroom accessories, and sanitary wares.
-    </p>
-    <br>
-    <p>
-      From basin mixers to wall mixers and overhead showers, every product is engineered
-      for precision, durability, and a flawless chrome finish — delivered directly to
-      contractors, retailers, and project developers at competitive wholesale prices.
-    </p>
-  </div>
+
+    <div class="about-divider"></div>
+
+    <div class="about-right reveal">
+
+        <div class="about-text">
+
+            <p>
+                Established in <strong>2004</strong>, <strong>Flowmen</strong> and
+                <strong>Fossil Flow</strong> have become trusted names in the CP fittings
+                industry. From our beginnings in <strong>Bhiwandi, Maharashtra</strong>,
+                we have built a strong wholesale network serving dealers, retailers,
+                builders, and project customers across <strong>22 districts of Maharashtra</strong>.
+            </p>
+
+            <p>
+                We offer a complete range of <strong>CP fittings, faucets, bathroom
+                accessories, sanitary ware, showers, sinks, flush tanks</strong>, and
+                related products. <strong>Fossil Flow</strong> represents our premium
+                collection, while <strong>Flowmen</strong> delivers dependable commercial
+                solutions—both manufactured primarily from premium brass for lasting
+                quality and performance.
+            </p>
+
+        </div>
+        <div class="about-highlight">
+            <div class="highlight-icon">📍</div>
+
+            <div>
+                <h4>Now Serving from Pisoli, Pune</h4>
+
+                <p>
+                    We are proud to expand our presence with a new branch in
+                    <strong>Pisoli, Pune</strong>, stocking our complete range of
+                    CP fittings, faucets, sanitary ware, showers, sinks, flush tanks,
+                    and bathroom accessories for faster delivery and better service
+                    across Maharashtra.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-stats">
+
+            <div class="about-stat">
+                <span>20+</span>
+                <small>Years of Experience</small>
+            </div>
+
+            <div class="about-stat">
+                <span>22</span>
+                <small>District Distribution</small>
+            </div>
+
+            <div class="about-stat">
+                <span>2</span>
+                <small>Trusted Brands</small>
+            </div>
+
+            <div class="about-stat">
+                <span>100%</span>
+                <small>Brass Products</small>
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
 <!-- PRODUCTS -->
@@ -824,11 +289,18 @@
       Priced for<br>the Trade.
     </div>
     <div class="why-features">
-      <div class="why-feat reveal">
+      <!-- <div class="why-feat reveal">
         <div class="why-feat-icon">🏭</div>
         <div>
           <div class="why-feat-title">Direct Manufacturer</div>
           <div class="why-feat-desc">Factory-direct pricing with no middlemen. Better margins for your business.</div>
+        </div>
+      </div> -->
+      <div class="why-feat reveal" style="transition-delay:0.3s">
+        <div class="why-feat-icon">🚚</div>
+        <div>
+          <div class="why-feat-title">Wholesale Supply</div>
+          <div class="why-feat-desc">Bulk orders fulfilled efficiently from our Pisoli, Pune warehouse.</div>
         </div>
       </div>
       <div class="why-feat reveal" style="transition-delay:0.1s">
@@ -845,13 +317,7 @@
           <div class="why-feat-desc">All products use high-grade brass alloys with a durable chrome-plated finish.</div>
         </div>
       </div>
-      <div class="why-feat reveal" style="transition-delay:0.3s">
-        <div class="why-feat-icon">🚚</div>
-        <div>
-          <div class="why-feat-title">Wholesale Supply</div>
-          <div class="why-feat-desc">Bulk orders fulfilled efficiently from our Pisoli, Pune warehouse.</div>
-        </div>
-      </div>
+
     </div>
   </div>
 
@@ -874,46 +340,86 @@
   <div class="section-title reveal" style="margin-bottom:56px">Contact Us</div>
   <div class="contact-inner">
     <div class="contact-left reveal">
-      <div class="contact-title">Let's Work<br>Together</div>
-      <p class="contact-sub">
-        Whether you're a contractor, retailer, or developer — reach out for wholesale pricing,
-        product catalogues, or bulk enquiries.
-      </p>
 
-      <div class="contact-detail">
+        <div class="contact-title">
+            Let's Work<br>Together
+        </div>
+
+        <p class="contact-sub">
+            Whether you're a dealer, retailer, contractor, or project developer,
+            get in touch with us for wholesale pricing, product catalogs, and bulk enquiries.
+        </p>
+<div class="contact-info-grid">
+
+    <div class="contact-detail">
         <div class="contact-icon">👤</div>
         <div>
-          <div class="contact-detail-label">Contact Person</div>
-          <div class="contact-detail-value"><strong>Abdul Rehman</strong></div>
+            <div class="contact-detail-label">Contact Person</div>
+            <div class="contact-detail-value">
+                <strong>Abdul Rehman</strong>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="contact-detail">
+    <div class="contact-detail">
         <div class="contact-icon">📞</div>
         <div>
-          <div class="contact-detail-label">Phone</div>
-          <div class="contact-detail-value">
-            <a href="tel:9004699582">9004699582</a><br>
-            <a href="tel:9594221355">9594221355</a><br>
-            <span style="font-size:0.8rem;color:var(--grey);">Office: </span>
-            <a href="tel:9595221357">9595221357</a>
-          </div>
+            <div class="contact-detail-label">Sales & Enquiry</div>
+            <div class="contact-detail-value">
+                <a href="tel:+919004699582">+91 90046 99582</a><br>
+                <a href="tel:+919594221355">+91 95942 21355</a>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="contact-detail">
+    <div class="contact-detail">
+        <div class="contact-icon">☎️</div>
+        <div>
+            <div class="contact-detail-label">Office Number</div>
+            <div class="contact-detail-value">
+                <a href="tel:+919594221357">+91 95942 21357</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-detail">
+        <div class="contact-icon">🏢</div>
+        <div>
+            <div class="contact-detail-label">Head Office</div>
+            <div class="contact-detail-value">
+                <a href="tel:+918108352786">+91 81083 52786</a><br>
+                <a href="tel:+919969536882">+91 99695 36882</a><br>
+                <a href="tel:+919892275359">+91 98922 75359</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">
+                <a href="mailto:ardhukka@fossilflow.in">ardhukka@fossilflow.in</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-detail">
         <div class="contact-icon">📍</div>
         <div>
-          <div class="contact-detail-label">Address</div>
-          <div class="contact-detail-value">
-            Flowman Metal Industries<br>
-            Godown No. 7, Sr No 10/19<br>
-            Mahatma Jyotiba Phule Marg<br>
-            Opp. Dreams Wisteria Society<br>
-            Pisoli, Pune – 411060
-          </div>
+            <div class="contact-detail-label">Address</div>
+            <div class="contact-detail-value">
+                <strong>Flowman Metal Industries</strong><br>
+                Godown No.7, Sr.No.10/19,<br>
+                Behind Dharmavat Petrol Pump,<br>
+                Mahatma Jyotiba Phule Marg,<br>
+                Opp. Dreams Wisteria Society,<br>
+                Pisoli, Pune – 411060
+            </div>
         </div>
-      </div>
+    </div>
+
+</div>
     </div>
 
     <div class="reveal" style="transition-delay:0.15s">
