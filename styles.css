@@ -589,7 +589,10 @@
     border-top: 1px solid rgba(201,168,76,0.12);
   }
   .contact-inner {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+    gap: 56px;
+    align-items: start;
   }
   .contact-left .contact-title {
     font-family: 'Playfair Display', serif;
@@ -599,6 +602,13 @@
   }
   .contact-left .contact-sub {
     font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 40px;
+  }
+  .contact-form-wrap {
+    background: #ffffff;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.05);
   }
   .contact-detail {
     display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px;
@@ -654,12 +664,13 @@
     resize: vertical;
   }
   .form-group input::placeholder,
-  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group textarea::placeholder { color: rgba(18,18,18,0.35); }
   .form-group input:focus,
   .form-group textarea:focus,
   .form-group select:focus { border-color: var(--gold); }
   .form-group select option { background: var(--surface); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-row .form-group:last-child { grid-column: 1 / -1; }
   .btn-submit {
     background: var(--gold);
     color: var(--text);
@@ -861,8 +872,8 @@
 
 .office-grid{
     display:grid;
-    grid-template-columns:repeat(2,minmax(280px,1fr));
-    gap:24px;
+    grid-template-columns:1fr;
+    gap:22px;
     margin-top:35px;
 }
 
@@ -984,6 +995,10 @@
 }
 
 @media(max-width:576px){
+
+    .contact-form-wrap{
+        padding:22px;
+    }
 
     .office-header{
         padding:18px;
