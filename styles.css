@@ -334,7 +334,7 @@
     }
 
     .about-stats{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
@@ -742,7 +742,7 @@
     nav { padding: 14px 20px; }
     #hero { padding: 0 6vw; }
     #products, #series, #why, #contact { padding: 64px 6vw; }
-    .products-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns:repeat(2, 1fr); }
     .series-grid { grid-template-columns: 1fr 1fr; }
   }
 
